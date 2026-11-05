@@ -490,3 +490,8 @@ a { color: var(--blue); }
 @keyframes pulse { 0%,100% { transform: scale(1); opacity: .16; } 50% { transform: scale(1.35); opacity: 0; } }
 .node .lbl text[text-anchor="start"] { text-anchor: start; }
 .node .lbl text[text-anchor="end"] { text-anchor: end; }
+
+/* logo */
+.topbar-in { height: 76px; }
+.brand-logo { height: 60px; width: auto; display: block; }
+@media (max-width: 680px) { .topbar-in { height: 64px; } .brand-logo { height: 50px; } }
