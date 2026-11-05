@@ -123,7 +123,7 @@ a { color: var(--blue); }
 .hero { position: relative; padding: 88px 0 72px; overflow: hidden; }
 .blob-a { width: 720px; right: -220px; top: -160px; opacity: .85; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; z-index: 1; }
-.hero h1 { font-size: clamp(40px, 6vw, 68px); letter-spacing: -0.035em; line-height: 1.04; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.035em; line-height: 1.04; margin-bottom: 24px; }
 .lead { font-size: 19px; color: var(--ink-2); max-width: 34em; }
 
 .trust { padding: 32px; margin: 0; }
@@ -308,7 +308,7 @@ a { color: var(--blue); }
 .compare-foot { margin-top: 18px; font-size: 13.5px; color: var(--ink-3); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
 /* ---------- benefits ---------- */
-.benefits { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; }
+.benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .benefit { padding: 30px; }
 .benefit:first-child {
   background: linear-gradient(160deg, #fff 30%, var(--blue-wash));
@@ -366,7 +366,7 @@ a { color: var(--blue); }
 .route-rule { margin-top: 18px; font-size: 14.5px; color: var(--ink); font-weight: 500; }
 
 /* ---------- commitment ---------- */
-.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .step { padding: 26px; }
 .step .step-n { margin-bottom: 18px; }
 .step h3 { font-size: 19px; }
@@ -376,7 +376,7 @@ a { color: var(--blue); }
   content: ""; position: absolute; right: -13px; top: 40px; width: 10px; height: 10px;
   border-top: 2px solid #B3C0D2; border-right: 2px solid #B3C0D2; rotate: 45deg; z-index: 2;
 }
-.terms { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px; }
+.terms { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
 .term { padding: 26px; }
 .term h3 { font-size: 17px; }
 .term ul { display: grid; gap: 8px; }
@@ -458,3 +458,35 @@ a { color: var(--blue); }
   .price-line { flex-direction: column; gap: 4px; }
   .inaction { padding: 24px; }
 }
+
+/* ---------- expanding node (hero) ---------- */
+.node { padding: 24px 24px 22px; margin: 0; }
+.node-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.node .ring { fill: none; stroke: #D5DEEA; stroke-width: 1.2; }
+.node .ring-1 { fill: var(--blue-wash); stroke: #C7D6F8; }
+.node .ring-3 { stroke-dasharray: 3 7; }
+.node .links path { stroke: #B9C9EE; stroke-width: 1.5; fill: none; }
+.node .links .link-out { stroke: #C9D3E0; stroke-dasharray: 4 5; }
+.node .sat circle { fill: #fff; stroke: var(--blue); stroke-width: 3; }
+.node .far circle { fill: #fff; stroke: #B3C0D2; stroke-width: 2; stroke-dasharray: 3 3; }
+.node .core { fill: var(--ink); }
+.node .core-glow { fill: var(--blue); opacity: .16; }
+.node .core-t { fill: #fff; font: 600 14px var(--font); text-anchor: middle; }
+.node .lbl text { font: 500 13px var(--font); fill: var(--ink-2); text-anchor: middle; }
+.node .lbl-far text { fill: var(--ink-3); font-weight: 400; font-size: 12px; }
+.node figcaption { margin-top: 10px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-2); }
+
+/* one orchestrated moment: the system expands outward on load */
+@media (prefers-reduced-motion: no-preference) {
+  .node .rings circle { transform-origin: 220px 200px; animation: grow 1.1s cubic-bezier(.2,.7,.2,1) both; }
+  .node .ring-2 { animation-delay: .12s !important; }
+  .node .ring-3 { animation-delay: .24s !important; }
+  .node .links path, .node .sat, .node .lbl { animation: fade .6s ease both .55s; }
+  .node .far, .node .lbl-far, .node .links .link-out { animation: fade .6s ease both 1s; }
+  .node .core-glow { transform-origin: 220px 200px; animation: pulse 3.2s ease-in-out 1.4s infinite; }
+}
+@keyframes grow { from { transform: scale(.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%,100% { transform: scale(1); opacity: .16; } 50% { transform: scale(1.35); opacity: 0; } }
+.node .lbl text[text-anchor="start"] { text-anchor: start; }
+.node .lbl text[text-anchor="end"] { text-anchor: end; }
