@@ -19,15 +19,14 @@
   });
 })();
 
-// "¿Qué viene después de marzo?" reveal
-(function () {
-  const btn = document.getElementById('nivel2-btn');
-  const panel = document.getElementById('nivel2');
-  if (!btn || !panel) return;
+// Expandable panels ("¿Qué viene después de marzo?", opcionales)
+document.querySelectorAll('button[aria-controls][data-open]').forEach((btn) => {
+  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  if (!panel) return;
   btn.addEventListener('click', () => {
     const open = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!open));
-    btn.textContent = open ? 'Ver el siguiente nivel' : 'Ocultar';
+    btn.textContent = open ? btn.dataset.closed : btn.dataset.open;
     panel.hidden = open;
   });
-})();
+});
